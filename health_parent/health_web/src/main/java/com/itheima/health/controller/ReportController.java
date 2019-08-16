@@ -181,4 +181,16 @@ public class ReportController {
         }
         return null;
     }
+
+    //根据年龄间隔查询对应的人数
+    @RequestMapping("/getMemberReportByAge")
+    public Result getMemberReportByAge(){
+        try {
+            Map<String,Object> map=memberService.findMemberReportByAge();
+            return new Result(true, MessageConstant.GET_AGE_LIST_SUCCESS,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.GET_AGE_LIST_FAIL);
+        }
+    }
 }

@@ -3,6 +3,9 @@ package com.itheima.health.dao;
 import com.itheima.health.pojo.Member;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName CheckItemDao
  * @Description TODO
@@ -27,4 +30,6 @@ public interface MemberDao {
     Integer findTotalMember();
 
     Integer findNewMemberAfterRegTime(String monthFirstDay);
+    //查询指定年龄段的会员人数
+    List<Map<String,Object>> findMemberReportByAge();
 }

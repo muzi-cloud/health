@@ -75,4 +75,7 @@ public class MessageConstant {
     public static final String GET_SETMEAL_LIST_FAIL = "查询套餐列表数据失败";
 
     public static final String DELETE_CHECKITEM_COUNT_FAIL = "检查项和检查组的中间表存在数据，不能删除，需要先删除中间表的数据";
+
+    public static final String GET_AGE_LIST_SUCCESS = "获取年龄段人数成功";
+    public static final String GET_AGE_LIST_FAIL = "获取年龄段人数失败";
 }

@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName CheckItemServiceImpl
@@ -48,5 +50,24 @@ public class MemberServiceImpl implements MemberService {
             memberCount.add(count);
         }
         return memberCount;
+    }
+    //通过年龄算出人数占比
+    @Override
+    public Map<String, Object> findMemberReportByAge() {
+        Map<String,Object> map=new HashMap<>();
+        //封装指定年龄段及其人数
+        List<Map<String,Object>> listAgeCount=memberDao.findMemberReportByAge();
+        //封装指定年龄段
+        List<String> listAge=new ArrayList<>();
+        if(listAgeCount!=null){
+            for (Map<String, Object> stringObjectMap : listAgeCount) {
+                String name = (String) stringObjectMap.get("name");
+                listAge.add(name);
+            }
+        }
+        //添加到map中
+        map.put("ages",listAge);
+        map.put("agesCount",listAgeCount);
+        return map;
     }
 }
