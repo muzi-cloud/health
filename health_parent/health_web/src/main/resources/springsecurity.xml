@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/mvc
+                  http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                  http://code.alibabatech.com/schema/dubbo
+                  http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+                  http://www.springframework.org/schema/context
+                  http://www.springframework.org/schema/context/spring-context.xsd
+                  http://www.springframework.org/schema/security
+                  http://www.springframework.org/schema/security/spring-security.xsd">
+    <!--1：定义哪些链接可以放行（不需要权限，也能访问的url）-->
+    <security:http security="none" pattern="/js/**"></security:http>
+    <security:http security="none" pattern="/css/**"></security:http>
+    <security:http security="none" pattern="/img/**"></security:http>
+    <security:http security="none" pattern="/plugins/**"></security:http>
+    <security:http security="none" pattern="/template/**"></security:http>
+    <security:http security="none" pattern="/login.html"></security:http>
+
+    <!--开启权限注解支持，实现对类进行权限控制-->
+    <security:global-method-security pre-post-annotations="enabled"></security:global-method-security>
+    <!--2：定义哪些链接不可以放行，需要有角色、权限才能放行访问
+        先配置所有的url，都必须通过角色和权限才能访问
+        security:http：配置url
+            auto-config="true"：自动配置，SpringSecurity会自动配置你的登录页面，完成认证功能，在登录成功后，自动配置退出功能
+            use-expressions="true"：是否使用表达式配置权限
+        security:intercept-url：配置拦截的url
+            pattern="/**"：SpringSecurity会拦截所有的url
+            access=""：表示访问的资源
+                    * 使用表达式：hasRole('ROLE_ADMIN')，表示具有ROLE_ADMIN的角色才能访问所有的资源
+                    * 使用表达式：hasAuthority('checkitem_delete')"，表示具有checkitem_delete权限才能访问所有的资源
+                    * 不使用表达式：checkitem_delete，直接写（建议使用表达式）
+    -->
+    <security:http auto-config="true" use-expressions="true">
+        <!--设置在页面可以通过iframe访问受保护的页面，默认为不允许访问，需要添加security:frame-options policy="SAMEORIGIN"-->
+        <security:headers>
+            <security:frame-options policy="SAMEORIGIN"></security:frame-options>
+        </security:headers>
+        <!--只要完成登录认证，就可以访问其他资源；在Controller类中添加SpringSecurity的注解，完成权限的控制-->
+        <security:intercept-url pattern="/**" access="isAuthenticated()"></security:intercept-url>
+        <!--只要认证就可以访问a.html-->
+        <!--<security:intercept-url pattern="/index.html" access="isAuthenticated()"></security:intercept-url>-->
+        <!--<security:intercept-url pattern="/a.html" access="isAuthenticated()"></security:intercept-url>-->
+        <!--<security:intercept-url pattern="/b.html" access="hasAuthority('add')"></security:intercept-url>-->
+        <!--<security:intercept-url pattern="/c.html" access="hasRole('ROLE_ADMIN')"></security:intercept-url>-->
+        <!--<security:intercept-url pattern="/d.html" access="hasRole('ABC')"></security:intercept-url>-->
+
+        <!--加入表单登录的配置信息
+            login-page="/login.html"：表示指定登录页面
+            username-parameter="username"：使用登录名的名称，默认值是username
+            password-parameter="password"：使用登录名的密码，默认值是password
+            login-processing-url="/login.do"：表示登录的url地址
+            default-target-url="/index.html"：登录成功后的url地址
+            authentication-failure-url="/login.html"：认证失败后跳转的url地址，失败后指定/login.html
+            always-use-default-target="true"：表示如果登录成功，始终使用default-target-url定义的页面
+        -->
+        <security:form-login login-page="/login.html"
+                             username-parameter="username"
+                             password-parameter="password"
+                             login-processing-url="/login.do"
+                             default-target-url="/pages/main.html"
+                             authentication-failure-url="/login.html"
+                             always-use-default-target="true"/>
+
+        <!--退出的操作
+            logout-url="/logout"：退出的url
+            logout-success-url="/login.html"：退出成功后，访问的地址
+            invalidate-session="true"：退出后，清空所有的Session
+        -->
+        <security:logout logout-url="/logout.do" logout-success-url="/login.html" invalidate-session="true"></security:logout>
+
+        <!--关闭csrfFilter，取消csrf的权限-->
+        <security:csrf disabled="true"></security:csrf>
+
+    </security:http>
+
+    <!--3：认证管理，指定登录账号的登录名和密码，并对当前登录人授予访问的角色和权限
+       security:user：指定当前的用户信息
+         name="" ：登录名
+         password=""：密码
+         authorities=""：表示权限或者角色
+
+         登录名是admin，密码是admin，admin的用户具有ROLE_ADMIN
+         ############################################################3
+           user：定义用户信息，可以指定用户名、密码、角色，后期可以改为从数据库查询用户信息
+              {noop}：表示当前使用的密码为明文
+
+          springsecurity的密码校验底层：
+        PasswordEncoderFactories：
+            Map<String, PasswordEncoder> encoders = new HashMap();
+            encoders.put(encodingId, new BCryptPasswordEncoder()); // 默认会使用SpringSecurity提供的BCryptPasswordEncoder完成密码校验
+
+            encoders.put("noop", NoOpPasswordEncoder.getInstance());// 不需要对密码进行加密（明文）
+    -->
+    <!--<security:authentication-manager>-->
+        <!--<security:authentication-provider>-->
+            <!--<security:user-service>-->
+                <!--<security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN"></security:user>-->
+            <!--</security:user-service>-->
+        <!--</security:authentication-provider>-->
+    <!--</security:authentication-manager>-->
+
+    <!--从数据库中获取用户名和密码，并完成授权-->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="springSecurityUserService">
+            <security:password-encoder ref="bCryptPasswordEncoder"></security:password-encoder>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
+
+
+
+
+</beans>

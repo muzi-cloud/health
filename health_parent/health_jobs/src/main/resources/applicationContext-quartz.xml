@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/context
+                  http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--1：定义任务调度的类（JobDemo）；配置任务调度细节-->
+    <bean id="jobDemo" class="com.itheima.health.job.ClearImgDemo"></bean>
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!--注入目标对象-->
+        <property name="targetObject" ref="jobDemo"></property>
+        <!--注入目标对象的方法-->
+        <property name="targetMethod" value="run"></property>
+    </bean>
+    <!--2：定义触发器（定时任务触发器），指定一个时间点，来执行任务调度-->
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <!--注入任务细节对象-->
+        <property name="jobDetail" ref="jobDetail"></property>
+        <!--通过任务调度触发器的表达式定义执行的时间
+            7个参数组成：
+            参数1：秒（0-59）
+            参数2：分钟（0-59）
+            参数3：小时（0-23）
+            参数4：月中日期（1-31）
+            参数5:月
+            参数6：月中的周（周一-周日）(1-7)
+            参数7：（可以省略）
+
+            参数4和参数6有冲突的。有4没6（?)，有6没4(?)
+        -->
+        <property name="cronExpression" value="0 40 18 * * ?"></property>
+    </bean>
+    <!--3：启动触发器-->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <set>
+                <ref bean="cronTrigger"></ref>
+            </set>
+        </property>
+    </bean>
+
+    <!--组件的扫描-->
+    <context:component-scan base-package="com.itheima"></context:component-scan>
+</beans>
