@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * @ClassName SpringSecurityUserService
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/12 14:59
  * @Version V1.0

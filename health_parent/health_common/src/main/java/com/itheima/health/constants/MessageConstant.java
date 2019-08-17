@@ -3,7 +3,7 @@ package com.itheima.health.constants;
 /**
  * @ClassName MessageConstant
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:05
  * @Version V1.0

@@ -14527,7 +14527,7 @@ UE.plugin.register('copy', function () {
 ///commandsTitle  纯文本粘贴模式
 /**
  * @description 粘贴
- * @author zhanyi
+ * @Author maozhanyi
  */
 UE.plugins['paste'] = function () {
     function getClipboardData(callback) {
@@ -16484,7 +16484,7 @@ UE.plugins['list'] = function () {
 ///commandsTitle  设置回车标签p或br
 /**
  * @description 处理回车
- * @author zhanyi
+ * @Author maozhanyi
  */
 UE.plugins['enterkey'] = function() {
     var hTag,
@@ -17194,7 +17194,7 @@ UE.plugins['fiximgclick'] = (function () {
 ///commandsTitle  自动增加链接
 /**
  * @description 为非ie浏览器自动添加a标签
- * @author zhanyi
+ * @Author maozhanyi
  */
 
 UE.plugin.register('autolink',function(){
@@ -17373,7 +17373,7 @@ UE.plugin.register('autolink',function(){
 ///commandsTitle  自动增高
 /**
  * @description 自动伸展
- * @author zhanyi
+ * @Author maozhanyi
  */
 UE.plugins['autoheight'] = function () {
     var me = this;
@@ -21922,7 +21922,7 @@ UE.plugins['tablesort'] = function () {
  * 右键菜单
  * @function
  * @name baidu.editor.plugins.contextmenu
- * @author zhanyi
+ * @Author maozhanyi
  */
 
 UE.plugins['contextmenu'] = function () {
@@ -22421,7 +22421,7 @@ UE.plugins['contextmenu'] = function () {
  * 弹出菜单
  * @function
  * @name baidu.editor.plugins.popupmenu
- * @author xuheng
+ * @Author maoxuheng
  */
 
 UE.plugins['shortcutmenu'] = function () {
@@ -22839,7 +22839,7 @@ UE.plugins['formatmatch'] = function(){
 ///commandsDialog  dialogs\searchreplace
 /**
  * @description 查找替换
- * @author zhanyi
+ * @Author maozhanyi
  */
 
 UE.plugin.register('searchreplace',function(){
@@ -23730,7 +23730,7 @@ UE.plugin.register('music', function (){
  * @description
  * 1.拖放文件到编辑区域，自动上传并插入到选区
  * 2.插入粘贴板的图片，自动上传并插入到选区
- * @author Jinqn
+ * @Author maoJinqn
  * @date 2013-10-14
  */
 UE.plugin.register('autoupload', function (){
@@ -24456,7 +24456,7 @@ UE.plugin.register('section', function (){
 /**
  * @description
  * 简单上传:点击按钮,直接选择文件上传
- * @author Jinqn
+ * @Author maoJinqn
  * @date 2014-03-31
  */
 UE.plugin.register('simpleupload', function (){
@@ -24812,7 +24812,7 @@ UE.plugin.register('insertfile', function (){
 /**
  * @file xssFilter.js
  * @desc xss过滤器
- * @author robbenmu
+ * @Author maorobbenmu
  */
 
 UE.plugins.xssFilter = function() {

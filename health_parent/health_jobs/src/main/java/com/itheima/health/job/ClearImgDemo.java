@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @ClassName ClearImgDemo
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/5 18:27
  * @Version V1.0

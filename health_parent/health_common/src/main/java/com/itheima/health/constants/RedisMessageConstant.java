@@ -3,7 +3,7 @@ package com.itheima.health.constants;
 /**
  * @ClassName RedisMessageConstant
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/8 16:18
  * @Version V1.0

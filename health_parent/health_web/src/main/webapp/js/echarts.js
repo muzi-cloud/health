@@ -49,7 +49,7 @@ var __DEV__ = dev;
 /**
  * zrender: 生成唯一id
  *
- * @author errorrik (errorrik@gmail.com)
+ * @Author maoerrorrik (errorrik@gmail.com)
  */
 
 var idStart = 0x0907;
@@ -62,7 +62,7 @@ var guid = function () {
  * echarts设备环境识别
  *
  * @desc echarts基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据统计图表。
- * @author firede[firede@firede.us]
+ * @Author maofirede[firede@firede.us]
  * @desc thanks zepto.
  */
 
@@ -1333,7 +1333,7 @@ function param(target, e) {
 /**
  * Event Mixin
  * @module zrender/mixin/Eventful
- * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
+ * @Author maoKener (@Kener-林峰, kener.linfeng@gmail.com)
  *         pissang (https://www.github.com/pissang)
  */
 
@@ -1618,7 +1618,7 @@ function on(eventful, event, query, handler, context, isOnce) {
 /**
  * 事件辅助类
  * @module zrender/core/event
- * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
+ * @Author maoKener (@Kener-林峰, kener.linfeng@gmail.com)
  */
 
 var isDomLevel2 = (typeof window !== 'undefined') && !!window.addEventListener;
@@ -2474,7 +2474,7 @@ var matrix = (Object.freeze || Object)({
 /**
  * 提供变换扩展
  * @module zrender/mixin/Transformable
- * @author pissang (https://www.github.com/pissang)
+ * @Author maopissang (https://www.github.com/pissang)
  */
 
 var mIdentity = identity;
@@ -4625,7 +4625,7 @@ if (typeof window !== 'undefined') {
 /**
  * config默认配置项
  * @exports zrender/config
- * @author Kener (@Kener-林峰, kener.linfeng@gmail.com)
+ * @Author maoKener (@Kener-林峰, kener.linfeng@gmail.com)
  */
 
 /**
@@ -7117,7 +7117,7 @@ Pattern.prototype.getCanvasPattern = function (ctx) {
 
 /**
  * @module zrender/Layer
- * @author pissang(https://www.github.com/pissang)
+ * @Author maopissang(https://www.github.com/pissang)
  */
 
 function returnFalse() {
@@ -10272,7 +10272,7 @@ Painter.prototype = {
  * 动画主类, 调度和管理所有动画控制器
  *
  * @module zrender/animation/Animation
- * @author pissang(https://github.com/pissang)
+ * @Author maopissang(https://github.com/pissang)
  */
 // TODO Additive animation
 // http://iosoteric.com/additive-animations-animatewithduration-in-ios-8/
@@ -12262,7 +12262,7 @@ var areaStyleMixin = {
 /**
  * 曲线辅助模块
  * @module zrender/core/curve
- * @author pissang(https://www.github.com/pissang)
+ * @Author maopissang(https://www.github.com/pissang)
  */
 
 var mathPow = Math.pow;
@@ -12768,7 +12768,7 @@ function quadraticProjectPoint(
 }
 
 /**
- * @author Yi Shen(https://github.com/pissang)
+ * @Author maoYi Shen(https://github.com/pissang)
  */
 
 var mathMin$3 = Math.min;
@@ -12995,7 +12995,7 @@ function fromArc(
  * 可以用于 isInsidePath 判断以及获取boundingRect
  *
  * @module zrender/core/PathProxy
- * @author Yi Shen (http://www.github.com/pissang)
+ * @Author maoYi Shen (http://www.github.com/pissang)
  */
 
 // TODO getTotalLength, getPointAtLength
@@ -15541,7 +15541,7 @@ var Ring = Path.extend({
 /**
  * Catmull-Rom spline 插值折线
  * @module zrender/shape/util/smoothSpline
- * @author pissang (https://www.github.com/pissang)
+ * @Author maopissang (https://www.github.com/pissang)
  *         Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *         errorrik (errorrik@gmail.com)
  */
@@ -15609,7 +15609,7 @@ var smoothSpline = function (points, isLoop) {
 /**
  * 贝塞尔平滑曲线
  * @module zrender/shape/util/smoothBezier
- * @author pissang (https://www.github.com/pissang)
+ * @Author maopissang (https://www.github.com/pissang)
  *         Kener (@Kener-林峰, kener.linfeng@gmail.com)
  *         errorrik (errorrik@gmail.com)
  */
@@ -48544,7 +48544,7 @@ function addChild(child, node) {
 
 /**
  * @file Create data struct and define tree view's series model
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 SeriesModel.extend({
@@ -49058,7 +49058,7 @@ function defaultSeparation(node1, node2) {
 
 /**
  * @file This file used to draw tree view.
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 extendChartView({
@@ -49549,7 +49549,7 @@ function getEdgeShape(seriesScope, sourceLayout, targetLayout) {
 
 /**
  * @file Register the actions of the tree
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 registerAction({
@@ -53025,7 +53025,7 @@ registerLayout(treemapLayout);
  * Graph data structure
  *
  * @module echarts/data/Graph
- * @author Yi Shen(https://www.github.com/pissang)
+ * @Author maoYi Shen(https://www.github.com/pissang)
  */
 
 // id may be function name of Object, add a prefix to avoid this problem.
@@ -60241,7 +60241,7 @@ registerVisual(parallelVisual);
 
 /**
  * @file Get initial data and define sankey view's series model
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 var SankeySeries = SeriesModel.extend({
@@ -60401,7 +60401,7 @@ var SankeySeries = SeriesModel.extend({
 
 /**
  * @file  The file used to draw sankey view
- * @author  Deqing Li(annong035@gmail.com)
+ * @Author mao Deqing Li(annong035@gmail.com)
  */
 
 var nodeOpacityPath$1 = ['itemStyle', 'opacity'];
@@ -60831,7 +60831,7 @@ function createGridClipShape$2(rect, seriesModel, cb) {
 
 /**
  * @file The interactive action of sankey view
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 registerAction({
@@ -60866,7 +60866,7 @@ registerAction({
 
 /**
  * @file The layout algorithm of sankey view
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 var sankeyLayout = function (ecModel, api, payload) {
@@ -61381,7 +61381,7 @@ function computeEdgeDepths(nodes, orient) {
 
 /**
  * @file Visual encoding for sankey view
- * @author  Deqing Li(annong035@gmail.com)
+ * @Author mao Deqing Li(annong035@gmail.com)
  */
 
 var sankeyVisual = function (ecModel, payload) {
@@ -64678,7 +64678,7 @@ SeriesModel.extend({
 
 /**
  * @file defines echarts Heatmap Chart
- * @author Ovilia (me@zhangwenli.com)
+ * @Author maoOvilia (me@zhangwenli.com)
  * Inspired by https://github.com/mourner/simpleheat
  *
  * @module
@@ -68707,7 +68707,7 @@ extendComponentView({
 
 /**
  * @file  Define the themeRiver view's series model
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 var DATA_NAME_INDEX = 2;
@@ -68998,7 +68998,7 @@ var ThemeRiverSeries = SeriesModel.extend({
 
 /**
  * @file  The file used to draw themeRiver view
- * @author  Deqing Li(annong035@gmail.com)
+ * @Author mao Deqing Li(annong035@gmail.com)
  */
 
 extendChartView({
@@ -69181,7 +69181,7 @@ function createGridClipShape$3(rect, seriesModel, cb) {
 
 /**
  * @file  Using layout algorithm transform the raw data to layout information.
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 var themeRiverLayout = function (ecModel, api) {
@@ -69340,7 +69340,7 @@ function computeBaseline(data) {
 
 /**
  * @file Visual encoding for themeRiver view
- * @author Deqing Li(annong035@gmail.com)
+ * @Author maoDeqing Li(annong035@gmail.com)
  */
 
 var themeRiverVisual = function (ecModel) {
@@ -79902,7 +79902,7 @@ extendComponentView({
 
 /**
  * @file calendar.js
- * @author dxh
+ * @Author maodxh
  */
 
 /*
@@ -92635,7 +92635,7 @@ var arrayDiff$1 = function (oldArr, newArr, callback) {
 /**
  * @file Manages elements that can be defined in <defs> in SVG,
  *       e.g., gradients, clip path, etc.
- * @author Zhang Wenli
+ * @Author maoZhang Wenli
  */
 
 var MARK_UNUSED = '0';
@@ -92886,7 +92886,7 @@ Definable.prototype.getSvgElement = function (displayable) {
 
 /**
  * @file Manages SVG gradient elements.
- * @author Zhang Wenli
+ * @Author maoZhang Wenli
  */
 
 /**
@@ -93107,7 +93107,7 @@ GradientManager.prototype.markUsed = function (displayable) {
 
 /**
  * @file Manages SVG clipPath elements.
- * @author Zhang Wenli
+ * @Author maoZhang Wenli
  */
 
 /**
@@ -93273,7 +93273,7 @@ ClippathManager.prototype.markUsed = function (displayable) {
 
 /**
  * @file Manages SVG shadow elements.
- * @author Zhang Wenli
+ * @Author maoZhang Wenli
  */
 
 /**

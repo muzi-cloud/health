@@ -117,7 +117,7 @@ snippet doc_cp\n\
 	 *\n\
 	 * @package ${2:default}\n\
 	 * @subpackage ${3:default}\n\
-	 * @author ${4:`g:snips_author`}\n\
+	 * @Author mao${4:`g:snips_author`}\n\
 	 */${5}\n\
 # Class Variable - post doc\n\
 snippet doc_vp\n\
@@ -141,7 +141,7 @@ snippet doc_c\n\
 	 *\n\
 	 * @package ${4:default}\n\
 	 * @subpackage ${5:default}\n\
-	 * @author ${6:`g:snips_author`}\n\
+	 * @Author mao${6:`g:snips_author`}\n\
 	 */\n\
 	${1:}class ${2:}\n\
 	{\n\
@@ -164,7 +164,7 @@ snippet doc_fp\n\
 	 * ${1:undocumented function}\n\
 	 *\n\
 	 * @return ${2:void}\n\
-	 * @author ${3:`g:snips_author`}\n\
+	 * @Author mao${3:`g:snips_author`}\n\
 	 */${4}\n\
 # Function signature\n\
 snippet doc_s\n\
@@ -172,7 +172,7 @@ snippet doc_s\n\
 	 * ${4:undocumented function}\n\
 	 *\n\
 	 * @return ${5:void}\n\
-	 * @author ${6:`g:snips_author`}\n\
+	 * @Author mao${6:`g:snips_author`}\n\
 	 */\n\
 	${1}function ${2}(${3});${7}\n\
 # Function\n\
@@ -181,7 +181,7 @@ snippet doc_f\n\
 	 * ${4:undocumented function}\n\
 	 *\n\
 	 * @return ${5:void}\n\
-	 * @author ${6:`g:snips_author`}\n\
+	 * @Author mao${6:`g:snips_author`}\n\
 	 */\n\
 	${1}function ${2}(${3})\n\
 	{${7}\n\
@@ -191,7 +191,7 @@ snippet doc_h\n\
 	/**\n\
 	 * ${1}\n\
 	 *\n\
-	 * @author ${2:`g:snips_author`}\n\
+	 * @Author mao${2:`g:snips_author`}\n\
 	 * @version ${3:$Id$}\n\
 	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`\n\
 	 * @package ${5:default}\n\
@@ -203,7 +203,7 @@ snippet interface\n\
 	 * ${2:undocumented class}\n\
 	 *\n\
 	 * @package ${3:default}\n\
-	 * @author ${4:`g:snips_author`}\n\
+	 * @Author mao${4:`g:snips_author`}\n\
 	 */\n\
 	interface ${1:$FILENAME}\n\
 	{\n\
