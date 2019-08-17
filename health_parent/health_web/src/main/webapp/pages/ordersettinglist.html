@@ -145,7 +145,6 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    alert(row.orderId);
                     //axios删除选项组
                     axios.get("/ordersetting/delete/"+row.orderId+".do").then((response)=>{
                     if(response.data.flag){
