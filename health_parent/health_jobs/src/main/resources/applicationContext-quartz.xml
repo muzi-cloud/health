@@ -8,11 +8,19 @@
                   http://www.springframework.org/schema/context/spring-context.xsd">
     <!--1：定义任务调度的类（JobDemo）；配置任务调度细节-->
     <bean id="jobDemo" class="com.itheima.health.job.ClearImgDemo"></bean>
+    <!-- 清理ordersetting 任务bean对象 -->
+    <bean id="clearOrderSettingDemo" class="com.itheima.health.job.ClearOrderSetting"></bean>
+
     <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <!--注入目标对象-->
         <property name="targetObject" ref="jobDemo"></property>
         <!--注入目标对象的方法-->
         <property name="targetMethod" value="run"></property>
+    </bean>
+
+    <bean id ="orderDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="clearOrderSettingDemo"></property>
+        <property name="targetMethod" value="clearOrder"></property>
     </bean>
     <!--2：定义触发器（定时任务触发器），指定一个时间点，来执行任务调度-->
     <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
@@ -32,11 +40,17 @@
         -->
         <property name="cronExpression" value="0 40 18 * * ?"></property>
     </bean>
+
+    <bean id="orderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="orderDetail"></property>
+        <property name="cronExpression" value="0 ? 2 L * ?"></property>
+    </bean>
     <!--3：启动触发器-->
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <set>
                 <ref bean="cronTrigger"></ref>
+                <ref bean="orderTrigger"></ref>
             </set>
         </property>
     </bean>

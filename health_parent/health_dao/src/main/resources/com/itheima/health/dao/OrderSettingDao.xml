@@ -31,4 +31,9 @@
     <update id="updateReservationsByOrderDate" parameterType="orderSetting">
         update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
     </update>
+
+    <!--每月最后一天凌晨两点清理数据库-->
+    <delete id="clearOrderSetting" >
+          delete from t_ordersetting
+    </delete>
 </mapper>
