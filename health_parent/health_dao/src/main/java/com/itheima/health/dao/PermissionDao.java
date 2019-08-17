@@ -1,5 +1,6 @@
 package com.itheima.health.dao;
 
+import com.github.pagehelper.Page;
 import com.itheima.health.pojo.Permission;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,13 @@ public interface PermissionDao {
 
     Set<Permission> findPermissionListByRoleId(Integer roleId);
     List<Permission> findAll();
+    Page<Permission> selectByCondition(String queryString);
+
+    void add(Permission permission);
+
+    Permission findById(Integer id);
+
+    void edit(Permission permission);
+
+    void delete(Integer id);
 }
