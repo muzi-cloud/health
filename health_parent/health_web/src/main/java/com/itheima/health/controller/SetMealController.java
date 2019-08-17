@@ -37,7 +37,7 @@ public class SetMealController {
     @Autowired
     JedisPool jedisPool;
 
-    // 上传图片（往七牛云上上传）
+    // /上传图片（往七牛云上上传）
     @RequestMapping(value = "/upload")
     public Result upload(MultipartFile imgFile){
         try {
