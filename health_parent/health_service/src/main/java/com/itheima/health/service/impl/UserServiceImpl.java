@@ -9,7 +9,6 @@ import com.itheima.health.pojo.Role;
 import com.itheima.health.pojo.User;
 import com.itheima.health.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
@@ -94,6 +93,11 @@ public class UserServiceImpl implements UserService {
         userDao.deleteUserAndRole(id);
         userDao.delete(id);
 
+    }
+
+    @Override
+    public List<Map> findMenu(String username) {
+        return userDao.findMenu(username);
     }
 
 

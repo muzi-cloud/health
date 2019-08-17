@@ -3,6 +3,7 @@ package com.itheima.health.dao;
 import com.github.pagehelper.Page;
 import com.itheima.health.pojo.Role;
 import com.itheima.health.pojo.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,4 +39,8 @@ public interface UserDao {
     void deleteUserAndRole(Integer id);
 
     void delete(Integer id);
+
+    List<Map> findTwoMenuByOneMenu(@Param("id") Integer id, @Param("rid") Integer rid);
+
+    List<Map> findMenu(String username);
 }

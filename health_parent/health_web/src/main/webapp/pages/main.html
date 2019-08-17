@@ -207,7 +207,8 @@
             // 使用钩子函数，调用ajax，查询SpringSecurity中存放的用户名
             axios.get("/user/getUsername.do").then((response)=>{
                 if(response.data.flag){
-                    this.username = response.data.data;
+                    this.menuList = response.data.data.menu;
+                    this.username = response.data.data.username;
                 }
                 else{
                     this.$message.error(response.data.message);

@@ -7,16 +7,16 @@ import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.Role;
 import com.itheima.health.service.UserService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName CheckItemController
@@ -38,9 +38,17 @@ public class UserController {
     @RequestMapping(value = "/getUsername")
     public Result getUsername() {
         try {
-            /// 从SpringSecurity中获取认证用户的信息
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return new Result(true, MessageConstant.GET_USERNAME_SUCCESS, user.getUsername());
+            org.springframework.security.core.userdetails.User user =
+                    (org.springframework.security.core.userdetails.User)
+                            SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            String username = user.getUsername();
+            List<Map> list = userService.findMenu(username);
+            Map<String,Object> map = new HashMap<>();
+            map.put("username",username);
+            map.put("menu",list);
+            return new Result(true, MessageConstant.GET_USERNAME_SUCCESS,map);
+
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.GET_USERNAME_FAIL);

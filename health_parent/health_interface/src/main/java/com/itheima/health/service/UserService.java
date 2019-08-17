@@ -5,6 +5,7 @@ import com.itheima.health.pojo.Role;
 import com.itheima.health.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -25,4 +26,6 @@ public interface UserService {
     void update(User user, Integer[] roleitemIds);
 
     void delete(Integer id);
+
+    List<Map> findMenu(String username);
 }
