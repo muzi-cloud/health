@@ -9,6 +9,7 @@ import com.itheima.health.service.SetMealService;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -191,6 +192,19 @@ public class ReportController {
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.GET_AGE_LIST_FAIL);
+        }
+    }
+    //根据输入日期查询会员数量
+    @RequestMapping("/getMemberReportByDate")
+    public Result getMemberReportByDate(@RequestBody Map map){
+        try {
+
+            Map<String,Object> objectMap=reportService.getMemberReportByDate(map);
+
+            return new Result(true, MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS,objectMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.GET_MEMBER_NUMBER_REPORT_FAIL);
         }
     }
 }

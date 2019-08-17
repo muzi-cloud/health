@@ -8,10 +8,7 @@ import com.itheima.health.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName CheckItemServiceImpl
@@ -104,5 +101,34 @@ public class ReportServiceImpl implements ReportService {
             throw new RuntimeException("运行错误");
         }
         return map;
+    }
+
+    @Override
+    public Map<String, Object> getMemberReportByDate(Map map) throws Exception {
+
+        String begin = (String) map.get("begin");
+
+        String end = (String) map.get("end");
+
+        List<String> monthBetween = DateUtils.getMonthBetween(begin, end, "yyyy-MM");
+
+        List<String> list=new ArrayList<String>();
+        for (String month:monthBetween){
+            list.add(month);
+        }
+
+        Map<String,Object> map1=new HashMap<>();
+
+        map1.put("months", list);
+        List<Integer> list1=new ArrayList<>();
+        for (String month : list) {
+            month=month+"-31";
+
+            Integer count= memberDao.findMemberCountByRegTime(month);
+
+            list1.add(count);
+        }
+        map1.put("memberCount",list1);
+        return map1;
     }
 }
