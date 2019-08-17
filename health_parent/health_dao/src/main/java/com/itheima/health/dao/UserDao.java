@@ -1,7 +1,12 @@
 package com.itheima.health.dao;
 
+import com.github.pagehelper.Page;
+import com.itheima.health.pojo.Role;
 import com.itheima.health.pojo.User;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName CheckItemDao
@@ -15,4 +20,22 @@ import org.springframework.stereotype.Repository;
 public interface UserDao {
 
     User findUserByUsername(String username);
+
+    List<Role> findPage();
+
+    void add(User user);
+
+    void addUserAndRole(Map<String, Integer> map);
+
+    Page<User> findAllPage(String queryString);
+
+    User findById(Integer id);
+
+    List<Integer> findRoleItemByUserId(Integer id);
+
+    void update(User user);
+
+    void deleteUserAndRole(Integer id);
+
+    void delete(Integer id);
 }
