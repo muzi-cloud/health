@@ -31,4 +31,23 @@
     <update id="updateReservationsByOrderDate" parameterType="orderSetting">
         update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
     </update>
+    <!--通过查询条件封装套餐列表-->
+    <select id="findPage" parameterType="string" resultType="orderList">
+        SELECT o.id orderId,m.name,m.sex,m.phoneNumber,o.orderDate,s.name setmealName FROM t_member m
+        JOIN t_order o ON m.id=o.member_id
+        JOIN t_setmeal s ON s.id=o.setmeal_id
+        <where>
+            <if test="value!=null and value.length>0">
+                m.name like concat('%',#{value},'%') or s.name like concat('%',#{value},'%')
+            </if>
+        </where>
+    </select>
+    <!--通过预约日期查询是否存在-->
+    <select id="checkOrderDate" resultType="ordersetting" parameterType="string">
+        select * from t_ordersetting where orderDate=#{orderDate}
+    </select>
+    <!--预约成功后修改已预约人数-->
+    <update id="editReservationsByOrderDate" parameterType="ordersetting">
+        update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
+    </update>
 </mapper>

@@ -33,4 +33,8 @@ public interface OrderDao {
     Integer findVisitsNumberBetweenOrderDate(@Param(value = "start")String start, @Param(value = "end") String end);
 
     List<Map<String,Object>> findHotSetmeal();
+    //通过预约id删除预约
+    void delete(Integer orderId);
+    //通过id查询预约信息
+    Order findById2(Integer orderId);
 }

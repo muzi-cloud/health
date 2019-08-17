@@ -2,10 +2,13 @@ package com.itheima.health.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.health.constants.MessageConstant;
+import com.itheima.health.entity.PageResult;
+import com.itheima.health.entity.QueryPageBean;
 import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.OrderSetting;
 import com.itheima.health.service.OrderSettingService;
 import com.itheima.health.utils.POIUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,4 +87,29 @@ public class OrderSettingController {
         }
     }
 
+    //分页查询显示预约列表
+    @RequestMapping("/findPage")
+    public Result findPage(@RequestBody QueryPageBean queryPageBean){
+        try {
+            PageResult pageResult = orderSettingService.findPage(queryPageBean);
+            return new Result(true,MessageConstant.ORDERSETTING_SUCCESS,pageResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  new Result(false,MessageConstant.ORDERSETTING_FAIL);
+        }
+
+    }
+
+    //删除预约列表
+    @RequestMapping("/delete/{orderId}")
+    public Result delete(@PathVariable("orderId")Integer orderId){
+        try {
+            orderSettingService.delete(orderId);
+            return new Result(true,MessageConstant.DELETE_ORDER_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  new Result(false,MessageConstant.DELETE_ORDER_SUCCESS);
+        }
+
+    }
 }

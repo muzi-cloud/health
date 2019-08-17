@@ -1,5 +1,7 @@
 package com.itheima.health.dao;
 
+import com.github.pagehelper.Page;
+import com.itheima.health.pojo.OrderList;
 import com.itheima.health.pojo.OrderSetting;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -29,4 +31,11 @@ public interface OrderSettingDao {
     OrderSetting findOrderSettingByOrderDate(Date date);
 
     void updateReservationsByOrderDate(OrderSetting orderSetting);
+    //通过查询条件封装套餐列表
+    Page<OrderList> findPage(String queryString);
+
+    //检查当前日期是否可以预约
+    OrderSetting checkOrderDate(String orderDate);
+    //修改已预约人数
+    void editReservationsByOrderDate(OrderSetting orderSetting);
 }

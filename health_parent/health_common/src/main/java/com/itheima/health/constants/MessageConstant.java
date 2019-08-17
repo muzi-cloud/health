@@ -78,4 +78,7 @@ public class MessageConstant {
 
     public static final String GET_AGE_LIST_SUCCESS = "获取年龄段人数成功";
     public static final String GET_AGE_LIST_FAIL = "获取年龄段人数失败";
+    //列表删除时使用
+    public static final String DELETE_ORDER_FAIL = "删除预约失败";
+    public static final String DELETE_ORDER_SUCCESS = "删除预约成功";
 }
