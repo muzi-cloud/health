@@ -1,6 +1,7 @@
 package com.itheima.health.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.itheima.health.constants.RedisConstant;
@@ -14,6 +15,7 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @ClassName CheckItemServiceImpl
@@ -57,13 +59,30 @@ public class SetMealServiceImpl implements SetMealService {
 
     @Override
     public List<Setmeal> findAll() {
-        List<Setmeal> list = setMealDao.findAll();
+        List<Setmeal> list =null;
+        String allSetmeal = jedisPool.getResource().get("AllSetmeal");
+        if(allSetmeal==null){
+            list = setMealDao.findAll();
+            String s = JSON.toJSONString(list);
+            jedisPool.getResource().set("AllSetmeal",s);
+        }else {
+            list = JSON.parseArray(allSetmeal, Setmeal.class);
+        }
         return list;
     }
 
     @Override
     public Setmeal findById(Integer id) {
-        return setMealDao.findById(id);
+        Setmeal setmeal =null;
+        String setmealFromRedis = jedisPool.getResource().get("Setmeal");
+        if(setmealFromRedis==null){
+            setmeal=setMealDao.findById(id);
+            String s = JSON.toJSONString(setmeal);
+            jedisPool.getResource().set("Setmeal",s);
+        }else {
+            setmeal = JSON.parseObject(setmealFromRedis, Setmeal.class);
+        }
+        return setmeal;
     }
 
     @Override
