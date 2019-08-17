@@ -81,4 +81,13 @@ public class MessageConstant {
     //列表删除时使用
     public static final String DELETE_ORDER_FAIL = "删除预约失败";
     public static final String DELETE_ORDER_SUCCESS = "删除预约成功";
+
+    public static final String QUERY_ROLE_SUCCESS = "查询角色成功";
+    public static final String QUERY_ROLE_FAIL = "查询角色失败";
+    public static final String ADD_ROLE_SUCCESS = "添加角色成功";
+    public static final String ADD_ROLE_FAIL = "添加角色失败";
+    public static final String EDIT_ROLE_SUCCESS = "修改角色成功";
+    public static final String EDIT_ROLE_FAIL = "修改角色失败";
+    public static final String DELETE_ROLE_SUCCESS = "删除角色成功";
+    public static final String DELETE_ROLE_FAIL = "删除角色失败";
 }

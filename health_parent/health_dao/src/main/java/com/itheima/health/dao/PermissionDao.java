@@ -3,6 +3,7 @@ package com.itheima.health.dao;
 import com.itheima.health.pojo.Permission;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,4 +18,5 @@ import java.util.Set;
 public interface PermissionDao {
 
     Set<Permission> findPermissionListByRoleId(Integer roleId);
+    List<Permission> findAll();
 }

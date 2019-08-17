@@ -7,4 +7,8 @@
     <select id="findPermissionListByRoleId" parameterType="int" resultType="permission">
         SELECT p.* FROM t_permission p,t_role_permission rp WHERE p.id = rp.permission_id AND rp.role_id = #{roleId}
     </select>
+
+    <select id="findAll" resultType="permission">
+        select*from t_permission
+    </select>
 </mapper>
