@@ -21,7 +21,7 @@ import java.util.UUID;
 /**
  * @ClassName CheckItemController
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:55
  * @Version V1.0
@@ -37,7 +37,7 @@ public class SetMealController {
     @Autowired
     JedisPool jedisPool;
 
-    // 上传图片（往七牛云上上传）
+    // /上传图片（往七牛云上上传）
     @RequestMapping(value = "/upload")
     public Result upload(MultipartFile imgFile){
         try {
