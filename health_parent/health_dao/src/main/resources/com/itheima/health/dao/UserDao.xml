@@ -32,7 +32,7 @@
         <where>
             <if test="value!=null and value.length>0">
                 <!-- code = #{value} or name like '%${value}%' or helpcode = #{value}-->
-                 id= #{value} or username like concat('%',#{value},'%')
+                  username like concat('%',#{value},'%')
             </if>
         </where>
     </select>
