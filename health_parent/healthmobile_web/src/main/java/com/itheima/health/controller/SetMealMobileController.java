@@ -5,8 +5,10 @@ import com.itheima.health.constants.MessageConstant;
 import com.itheima.health.entity.Result;
 import com.itheima.health.pojo.Setmeal;
 import com.itheima.health.service.SetMealService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class SetMealMobileController {
     public Result getSetmeal(){
         try {
             List<Setmeal> list = setMealService.findAll();
+
             return new Result(true, MessageConstant.GET_SETMEAL_LIST_SUCCESS,list);
         } catch (Exception e) {
             e.printStackTrace();
