@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping(value = "/getUsername")
     public Result getUsername(){
         try {
-            // 从SpringSecurity中获取认证用户的信息
+            /// 从SpringSecurity中获取认证用户的信息
             User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             return new Result(true, MessageConstant.GET_USERNAME_SUCCESS,user.getUsername());
         } catch (Exception e) {
