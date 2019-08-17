@@ -104,7 +104,8 @@ public class UserController {
             e.printStackTrace();
             return new Result(false,"失败");
         }
-    } 
+    }
+    //
     @RequestMapping(value = "/findAllPage")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = userService.findAllPage(
