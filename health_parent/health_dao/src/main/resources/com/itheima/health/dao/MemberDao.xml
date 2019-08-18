@@ -51,4 +51,9 @@
         FROM (SELECT NOW() AS "时间",birthday,TIMESTAMPDIFF(YEAR, birthday, CURDATE()) AS age FROM t_member  )a
         GROUP BY name
     </select>
+
+    <!--根据性别统计会员数量-->
+    <select id="findMemberCount" resultType="map">
+        SELECT sex as name,COUNT(m.id) value FROM t_member m WHERE sex>0  GROUP BY sex
+    </select>
 </mapper>

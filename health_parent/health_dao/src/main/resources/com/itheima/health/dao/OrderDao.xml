@@ -75,4 +75,12 @@
         ORDER BY setmeal_count DESC
         LIMIT 0,4
     </select>
+    <!--通过id查询预约信息-->
+    <select id="findById2" resultType="order" parameterType="int">
+        select * from t_order where id=#{id}
+    </select>
+    <!--通过id删除预约-->
+    <delete id="delete" parameterType="int">
+        delete from t_order where id=#{id}
+    </delete>
 </mapper>

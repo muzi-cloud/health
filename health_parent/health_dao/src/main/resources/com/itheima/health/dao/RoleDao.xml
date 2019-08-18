@@ -15,4 +15,76 @@
     <select id="findRoleListByUserId" parameterType="int" resultMap="rolePermissionMap">
         SELECT r.* FROM t_role r,t_user_role ur WHERE r.id = ur.role_id AND ur.user_id = #{userId}
     </select>
+
+    <insert id="add" parameterType="role">
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT last_insert_id()
+        </selectKey>
+        insert into t_role (name,keyword,description)
+        values (#{name},#{keyword},#{description})
+    </insert>
+
+    <insert id="setRoleAndMenu">
+        insert into t_role_menu (role_id,menu_id) values (#{roleId},#{menuId})
+    </insert>
+
+    <insert id="setRoleAndPermission">
+        insert into t_role_permission (role_id,permission_id) values (#{roleId},#{permissionId})
+    </insert>
+
+    <select id="selectByCondition" parameterType="string" resultType="role">
+        select*from t_role
+        <if test="value!=null and value.length>0">
+            where name like concat("%",#{value},"%") or keyword like concat ("%",#{value},"%")
+        </if>
+    </select>
+
+    <select id="findPermissionIdsByRoleId" parameterType="int" resultType="int">
+        select permission_id from t_role_permission where role_id = #{roleId}
+    </select>
+
+    <select id="findMenuIdsByRoleId" parameterType="int" resultType="int">
+        SELECT rm.`menu_id`
+        FROM t_role_menu rm, t_menu m
+        WHERE rm.`menu_id` = m.`id` AND LEVEL = 2 AND rm.`role_id` = #{roleId}
+    </select>
+
+    <select id="findById" parameterType="int" resultType="role">
+        select*from t_role where id = #{id}
+    </select>
+
+    <delete id="deleteAssociationOfPermission" parameterType="int">
+        delete from t_role_permission where role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteAssociationOfMenu" parameterType="int">
+        delete from t_role_menu where role_id = #{roleId}
+    </delete>
+
+    <update id="edit" parameterType="role">
+        update t_role
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+
+            <if test="name!=null">
+                keyword = #{keyword},
+            </if>
+
+            <if test="name!=null">
+                description = #{description},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findUserCountByRoleId" parameterType="int" resultType="int">
+        select count(*) from t_user_role where role_id = #{roleId}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from t_role where id = #{id}
+    </delete>
+
 </mapper>

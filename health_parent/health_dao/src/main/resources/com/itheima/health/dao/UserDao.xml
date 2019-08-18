@@ -13,4 +13,69 @@
     <select id="findUserByUsername" parameterType="string" resultMap="userRoleMap">
         SELECT * FROM t_user WHERE username = #{username}
     </select>
+    <select id="findPage" resultType="com.itheima.health.pojo.Role">
+        SELECT * from t_role
+    </select>
+
+    <insert id="add" parameterType="com.itheima.health.pojo.User" >
+    <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+        SELECT last_insert_id()
+    </selectKey>
+        INSERT into t_user(birthday,gender,username,password,remark,station,telephone) VALUES (#{birthday},#{gender},#{username},#{password},#{remark},#{station},#{telephone})
+    </insert>
+    <insert id="addUserAndRole" parameterType="map">
+        insert into t_user_role(user_id,role_id) values(#{UserId},#{RoleId})
+    </insert>
+
+    <select id="findAllPage" parameterType="string" resultType="com.itheima.health.pojo.User">
+        SELECT id,gender,username,PASSWORD,remark,station,telephone FROM t_user
+        <where>
+            <if test="value!=null and value.length>0">
+                <!-- code = #{value} or name like '%${value}%' or helpcode = #{value}-->
+                  username like concat('%',#{value},'%')
+            </if>
+        </where>
+    </select>
+    <select id="findById" parameterType="int" resultType="com.itheima.health.pojo.User">
+        select * from t_user where id = #{id}
+    </select>
+    <select id="findRoleItemByUserId" parameterType="int" resultType="int">
+        SELECT role_id FROM t_user_role WHERE user_id = #{user_id}
+    </select>
+    <update id="update" parameterType="com.itheima.health.pojo.User">
+        update t_user
+        <set>
+            <if test="birthday!=null">birthday=#{birthday},</if>
+            <if test="gender!=null">gender=#{gender},</if>
+            <if test="username!=null">username=#{username},</if>
+            <if test="password!=null">password=#{password},</if>
+            <if test="remark!=null">remark=#{remark},</if>
+            <if test="station!=null">station=#{station},</if>
+            <if test="telephone!=null">telephone=#{telephone},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteUserAndRole" parameterType="int" >
+        DELETE from t_user_role  WHERE user_id = #{user_id}
+    </delete>
+    <delete id="delete" parameterType="int">
+        DELETE from t_user WHERE id=#{id}
+    </delete>
+
+    <select id="findMenu" parameterType="string" resultMap="findTwoMenu">
+        select m.path,m.name name,m.icon,m.linkUrl,role_id,m.id from t_menu m,(select * from t_role_menu where role_id in
+        (select id from t_role where id in(select role_id from t_user_role where user_id in
+        (select id from t_user where username = #{value})))) r where m.id = r.menu_id and m.level = 1
+    </select>
+
+    <resultMap id="findTwoMenu" type="map">
+        <id column="id" property="id"/>
+        <collection property="children" column="{id=id,rid=role_id}" select="com.itheima.health.dao.UserDao.findTwoMenuByOneMenu"/>
+    </resultMap>
+
+
+    <select id="findTwoMenuByOneMenu" resultType="map">
+        select m.path,m.name name,m.linkUrl from t_menu m where parentMenuId = #{id} and id in(select menu_id from t_role_menu where role_id = #{rid})
+    </select>
+
 </mapper>

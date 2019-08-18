@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * @ClassName CheckItemServiceImpl
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:55
  * @Version V1.0
@@ -69,5 +69,9 @@ public class MemberServiceImpl implements MemberService {
         map.put("ages",listAge);
         map.put("agesCount",listAgeCount);
         return map;
+    }
+    @Override
+    public List<Map<String, Object>> findMemberCount() {
+        return memberDao.findMemberCount();
     }
 }

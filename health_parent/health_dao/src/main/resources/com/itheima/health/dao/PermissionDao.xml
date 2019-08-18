@@ -7,4 +7,43 @@
     <select id="findPermissionListByRoleId" parameterType="int" resultType="permission">
         SELECT p.* FROM t_permission p,t_role_permission rp WHERE p.id = rp.permission_id AND rp.role_id = #{roleId}
     </select>
+
+    <select id="findAll" resultType="permission">
+        select*from t_permission
+    </select>
+
+    <select id="selectByCondition" parameterType="string" resultType="permission">
+        select*from t_permission
+        <if test="value!=null and value.length>0">
+            where name like concat("%",#{value},"%") or
+            keyword like concat("%",#{value},"%")
+        </if>
+
+    </select>
+
+    <insert id="add" parameterType="permission">
+        insert into t_permission (id, name, keyword, description) values (#{id}, #{name}, #{keyword}, #{description})
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="permission">
+        select * from t_permission where id = #{id}
+    </select>
+    <update id="edit" parameterType="permission">
+        update t_permission
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="keyword!=null">
+                keyword = #{keyword},
+            </if>
+            <if test="description!=null">
+                description = #{description}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from t_permission where id = #{id}
+    </delete>
 </mapper>

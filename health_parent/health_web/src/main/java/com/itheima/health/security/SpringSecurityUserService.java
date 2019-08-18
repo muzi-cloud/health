@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * @ClassName SpringSecurityUserService
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/12 14:59
  * @Version V1.0
@@ -52,7 +52,6 @@ public class SpringSecurityUserService implements UserDetailsService {
                 }
             }
         }
-
         // 参数一：登录名；参数二：使用数据库查询的密码（BCryptPasswordEncoding）；参数三：权限
         return new User(username,user.getPassword(),list);
     }

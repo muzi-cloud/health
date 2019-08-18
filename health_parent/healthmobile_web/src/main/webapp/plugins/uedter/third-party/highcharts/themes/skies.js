@@ -1,6 +1,6 @@
 /**
  * Skies theme for Highcharts JS
- * @author Torstein Hønsi
+ * @Author maoTorstein Hønsi
  */
 
 Highcharts.theme = {

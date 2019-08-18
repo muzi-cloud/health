@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>传智健康</title>
+    <meta name="description" content="传智健康">
+    <meta name="keywords" content="传智健康">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../plugins/elementui/index.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="hold-transition">
+<div id="app">
+    <div class="content-header">
+        <h1>预约管理
+            <small>预约列表</small>
+        </h1>
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="breadcrumb">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>预约管理</el-breadcrumb-item>
+            <el-breadcrumb-item>预约列表</el-breadcrumb-item>
+        </el-breadcrumb>
+    </div>
+    <div class="app-container">
+        <div class="box">
+            <div class="filter-container">
+                <el-input placeholder="用户名/套餐id" v-model="pagination.queryString" style="width: 200px;"
+                          class="filter-item"></el-input>
+                <el-button @click="findPageQuery()" class="dalfBut">查询</el-button>
+            </div>
+            <el-table size="small" current-row-key="id" :data="dataList" stripe highlight-current-row>
+                <el-table-column type="index" align="center" label="序号"></el-table-column>
+                <el-table-column prop="name" label="会员名" align="center"></el-table-column>
+                <el-table-column label="性别" align="center">
+                    <template slot-scope="scope">
+                        <span>{{ scope.row.sex == '0' ? '不限' : scope.row.sex == '1' ? '男' : '女'}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="phoneNumber" label="联系电话" align="center"></el-table-column>
+                <el-table-column prop="setmealName" label="预约套餐" align="center"></el-table-column>
+                <el-table-column prop="orderDate" label="预约时间" align="center"></el-table-column>
+                <el-table-column label="操作" align="center">
+                    <template slot-scope="scope">
+                        <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="pagination-container">
+                <el-pagination
+                        class="pagiantion"
+                        @current-change="handleCurrentChange"
+                        :current-page="pagination.currentPage"
+                        :page-size="pagination.pageSize"
+                        layout="total, prev, pager, next, jumper"
+                        :total="pagination.total">
+                </el-pagination>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- 引入组件库 -->
+<script src="../js/vue.js"></script>
+<script src="../plugins/elementui/index.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+<script>
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            pagination: {//分页相关模型数据
+                currentPage: 1,//当前页码
+                pageSize: 10,//每页显示的记录数
+                total: 0,//总记录数
+                queryString: null//查询条件
+            },
+            dataList: [],//当前页要展示的分页列表数据
+            formData: {},//表单数据
+            tableData:[],//新增和编辑表单中对应的检查项列表数据
+            dialogFormVisible: false,//控制添加窗口显示/隐藏
+            dialogFormVisible4Edit:false,//控制编辑窗口显示/隐藏
+            rules: {//校验规则
+                code: [{required: true, message: '项目编码为必填项', trigger: 'blur'}],
+                name: [{required: true, message: '项目名称为必填项', trigger: 'blur'}]
+            }
+        },
+        //钩子函数，VUE对象初始化完成后自动执行
+        created() {
+            this.findPage();
+        },
+        methods: {
+            //分页查询预约列表
+            findPage() {
+                //使用axios，查询数据，传递QueryPageBean，响应数据PageResult
+                var params = {
+                    "currentPage": this.pagination.currentPage,
+                    "pageSize": this.pagination.pageSize,
+                    "queryString": this.pagination.queryString
+                };
+                axios.post("/ordersetting/findPage.do", params).then((response) => {
+                    // alert(JSON.stringify(response.data));
+                    vue.pagination.total = response.data.data.total;
+                vue.dataList = response.data.data.rows;
+            }).catch((error) => {
+
+                });
+            },
+            findPageQuery(){
+                if(this.pagination.queryString!=null){
+                    this.pagination.currentPage=1;
+                }
+                this.findPage();
+            },
+            //切换页码
+            handleCurrentChange(currentPage) {
+                //清空文本框
+                this.pagination.queryString="";
+                this.pagination.currentPage = currentPage;
+                this.findPage();
+            },
+            // 重置表单
+            resetForm() {
+                //让选项卡为第一个显示
+                this.activeName="first";
+                //表单内容重置
+                this.formData={};
+                //重置权限的id的复选框
+                this.permissionIds=[];
+                //重置菜单的id的复选框
+                this.menuIds=[];
+            },
+            //切换页码
+            handleCurrentChange(currentPage) {
+                this.pagination.currentPage=currentPage;
+                this.findPage();
+            },
+            // 删除
+            handleDelete(row) {
+                this.$confirm('是否删除预约, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    //axios删除选项组
+                    axios.get("/ordersetting/delete/"+row.orderId+".do").then((response)=>{
+                    if(response.data.flag){
+                    this.$message.success(response.data.message);
+                }else{
+                    this.$message.error(response.data.message)
+                }
+            }).catch((error)=>{
+                    this.$message.error("服务忙，请稍后")
+            }).finally(()=>{
+                    this.findPage();
+            });
+            }).catch(() => {
+                    this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });
+            });
+            }
+        }
+    })
+</script>
+</html>

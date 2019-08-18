@@ -25,7 +25,7 @@ import java.util.*;
 /**
  * @ClassName CheckItemController
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:55
  * @Version V1.0
@@ -205,6 +205,32 @@ public class ReportController {
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.GET_MEMBER_NUMBER_REPORT_FAIL);
+        }
+    }
+    //统计图形报表,会员中男女比例占比统计
+    @RequestMapping(value ="/getMembersexReport")
+    public Result getMembersexReport(){
+        try {
+            //把会员按性别分类的数量封装到List集合中
+
+            List<Map<String,Object>> memberCount=memberService.findMemberCount();
+
+            Map<String,Object> map=new HashMap<>();
+            map.put("memberCount",memberCount);
+            List<String> membersex=new ArrayList<>();
+            for (Map<String, Object> stringObjectMap : memberCount) {
+                if (stringObjectMap.get("name").equals("1")){
+                    stringObjectMap.put("name","男");
+                }else {
+                    stringObjectMap.put("name","女");
+                }
+                String name=(String)stringObjectMap.get("name");
+                membersex.add(name);
+            }
+            return new Result(true,MessageConstant.GET_MEMBER_NUMBER_REPORT_SUCCESS,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.GET_MEMBER_NUMBER_REPORT_FAIL);
         }
     }
 }

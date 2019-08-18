@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @ClassName CheckItemDao
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:53
  * @Version V1.0
@@ -32,4 +32,6 @@ public interface MemberDao {
     Integer findNewMemberAfterRegTime(String monthFirstDay);
     //查询指定年龄段的会员人数
     List<Map<String,Object>> findMemberReportByAge();
+
+    List<Map<String,Object>> findMemberCount();
 }

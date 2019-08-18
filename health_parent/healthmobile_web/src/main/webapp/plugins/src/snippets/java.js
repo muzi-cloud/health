@@ -143,7 +143,7 @@ snippet /**\n\
 	 * ${1}\n\
 	 */\n\
 snippet @au\n\
-	@author `system(\"grep \\`id -un\\` /etc/passwd | cut -d \\\":\\\" -f5 | cut -d \\\",\\\" -f1\")`\n\
+	@Author mao`system(\"grep \\`id -un\\` /etc/passwd | cut -d \\\":\\\" -f5 | cut -d \\\",\\\" -f1\")`\n\
 snippet @br\n\
 	@brief ${1:Description}\n\
 snippet @fi\n\

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @ClassName CheckItemDao
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:53
  * @Version V1.0
@@ -33,4 +33,8 @@ public interface OrderDao {
     Integer findVisitsNumberBetweenOrderDate(@Param(value = "start")String start, @Param(value = "end") String end);
 
     List<Map<String,Object>> findHotSetmeal();
+    //通过预约id删除预约
+    void delete(Integer orderId);
+    //通过id查询预约信息
+    Order findById2(Integer orderId);
 }

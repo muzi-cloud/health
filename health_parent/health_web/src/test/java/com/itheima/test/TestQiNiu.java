@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * @ClassName TestQiNiu
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/5 14:44
  * @Version V1.0

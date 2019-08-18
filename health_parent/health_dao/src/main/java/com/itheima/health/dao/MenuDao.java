@@ -1,21 +1,20 @@
 package com.itheima.health.dao;
 
-import com.itheima.health.pojo.CheckItem;
 import com.itheima.health.pojo.Menu;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * @ClassName CheckItemDao
- * @Description TODO
- * @Author ly
- * @Company 深圳黑马程序员
- * @Date 2019/8/2 15:53
- * @Version V1.0
- */
-@Repository
 public interface MenuDao {
+
+
+
+
+    List<Map<String,Object>> findAll();
+
+    List<Map<String,Object>> findMenuChildrenByMenuId4Role(Integer id);
+
+
 
     List<Menu> findMenuByCondition(String queryString);
 

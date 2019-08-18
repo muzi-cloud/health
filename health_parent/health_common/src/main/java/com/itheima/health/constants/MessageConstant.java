@@ -78,6 +78,27 @@ public class MessageConstant {
 
     public static final String GET_AGE_LIST_SUCCESS = "获取年龄段人数成功";
     public static final String GET_AGE_LIST_FAIL = "获取年龄段人数失败";
+    //列表删除时使用
+    public static final String DELETE_ORDER_FAIL = "删除预约失败";
+    public static final String DELETE_ORDER_SUCCESS = "删除预约成功";
+
+    public static final String QUERY_ROLE_SUCCESS = "查询角色成功";
+    public static final String QUERY_ROLE_FAIL = "查询角色失败";
+    public static final String ADD_ROLE_SUCCESS = "添加角色成功";
+    public static final String ADD_ROLE_FAIL = "添加角色失败";
+    public static final String EDIT_ROLE_SUCCESS = "修改角色成功";
+    public static final String EDIT_ROLE_FAIL = "修改角色失败";
+    public static final String DELETE_ROLE_SUCCESS = "删除角色成功";
+    public static final String DELETE_ROLE_FAIL = "删除角色失败";
+
+    public static final String DELETE_PERMISSION_FAIL = "删除权限失败";
+    public static final String DELETE_PERMISSION_SUCCESS = "删除权限成功";
+    public static final String ADD_PERMISSION_SUCCESS = "新增权限成功";
+    public static final String ADD_PERMISSION_FAIL = "新增权限失败";
+    public static final String EDIT_PERMISSION_FAIL = "编辑权限失败";
+    public static final String EDIT_PERMISSION_SUCCESS = "编辑权限成功";
+    public static final String QUERY_PERMISSION_SUCCESS = "查询权限成功";
+    public static final String QUERY_PERMISSION_FAIL = "查询权限失败";
     public static final String ADD_MEMBER1_SUCCESS = "新增菜单成功";
     public static final String DELETE_MEMBER1_FAIL = "新增菜单失败";
 

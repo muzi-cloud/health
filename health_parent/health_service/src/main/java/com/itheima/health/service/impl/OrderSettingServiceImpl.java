@@ -1,9 +1,17 @@
 package com.itheima.health.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.itheima.health.dao.OrderDao;
 import com.itheima.health.dao.OrderSettingDao;
+import com.itheima.health.entity.PageResult;
+import com.itheima.health.entity.QueryPageBean;
+import com.itheima.health.pojo.Order;
+import com.itheima.health.pojo.OrderList;
 import com.itheima.health.pojo.OrderSetting;
 import com.itheima.health.service.OrderSettingService;
+import com.itheima.health.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +20,7 @@ import java.util.*;
 /**
  * @ClassName CheckItemServiceImpl
  * @Description TODO
- * @Author ly
+ * @Author mao
  * @Company 深圳黑马程序员
  * @Date 2019/8/2 15:55
  * @Version V1.0
@@ -23,6 +31,8 @@ public class OrderSettingServiceImpl implements OrderSettingService {
 
     @Autowired
     OrderSettingDao orderSettingDao;
+    @Autowired
+    OrderDao orderDao;
 
     @Override
     public void addList(List<OrderSetting> orderSettingList) {
@@ -72,4 +82,32 @@ public class OrderSettingServiceImpl implements OrderSettingService {
     public void updateNumberByOrderDate(OrderSetting orderSetting) {
         saveOrUpdateOrderSetting(orderSetting);
     }
+    //分页查询获取预约列表
+    @Override
+    public PageResult findPage(QueryPageBean queryPageBean) {
+        PageHelper.startPage(queryPageBean.getCurrentPage(),queryPageBean.getPageSize());
+        Page<OrderList> page=orderSettingDao.findPage(queryPageBean.getQueryString());
+        return new PageResult(page.getTotal(),page.getResult());
+    }
+    //通过预约id删除预约
+    @Override
+    public void delete(Integer orderId) {
+        Order order=orderDao.findById2(orderId);
+        long time = new Date().getTime();//获取当前时间毫秒值
+        //如果预约日期大于今天
+        if(order.getOrderDate().getTime()>time){
+            try {
+                String orderDate = DateUtils.parseDate2String(order.getOrderDate());
+                OrderSetting orderSetting = orderSettingDao.checkOrderDate(orderDate);
+                orderSetting.setReservations(orderSetting.getReservations()+1);
+                orderSettingDao.editReservationsByOrderDate(orderSetting);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        //删除预约信息
+        orderDao.delete(orderId);
+
+    }
+
 }
