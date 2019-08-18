@@ -32,4 +32,6 @@ public interface MemberDao {
     Integer findNewMemberAfterRegTime(String monthFirstDay);
     //查询指定年龄段的会员人数
     List<Map<String,Object>> findMemberReportByAge();
+
+    List<Map<String,Object>> findMemberCount();
 }

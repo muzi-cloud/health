@@ -15,4 +15,5 @@ public interface MemberService {
 
     //获取指定年龄段的数据
     Map<String,Object> findMemberReportByAge();
+    List<Map<String, Object>> findMemberCount();
 }

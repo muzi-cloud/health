@@ -70,4 +70,8 @@ public class MemberServiceImpl implements MemberService {
         map.put("agesCount",listAgeCount);
         return map;
     }
+    @Override
+    public List<Map<String, Object>> findMemberCount() {
+        return memberDao.findMemberCount();
+    }
 }
