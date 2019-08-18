@@ -15,7 +15,6 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @ClassName CheckItemServiceImpl
@@ -74,11 +73,11 @@ public class SetMealServiceImpl implements SetMealService {
     @Override
     public Setmeal findById(Integer id) {
         Setmeal setmeal =null;
-        String setmealFromRedis = jedisPool.getResource().get("Setmeal");
+        String setmealFromRedis = jedisPool.getResource().get("Setmeal"+id);
         if(setmealFromRedis==null){
             setmeal=setMealDao.findById(id);
             String s = JSON.toJSONString(setmeal);
-            jedisPool.getResource().set("Setmeal",s);
+            jedisPool.getResource().set("Setmeal"+id,s);
         }else {
             setmeal = JSON.parseObject(setmealFromRedis, Setmeal.class);
         }

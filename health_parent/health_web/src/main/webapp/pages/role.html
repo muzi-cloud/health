@@ -275,7 +275,9 @@
                 //编辑
                 handleEdit() {
                     var menuIds = this.$refs.tree.getCheckedKeys();
-                    menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    if(this.$refs.tree.getHalfCheckedKeys().length>0 ) {
+                        menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    }
                     axios.post("/role/edit.do?menuIds="+menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
                         this.dialogFormVisible4Edit=false;
                         if(res.data.flag){
@@ -295,14 +297,16 @@
                     // alert(this.$refs.tree.getCheckedKeys());
                     // alert(this.permissionIds);
                     var menuIds = this.$refs.tree.getCheckedKeys();
-                    menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    if(this.$refs.tree.getHalfCheckedKeys().length>0 ) {
+                        menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    }
                     axios.post("/role/add.do?menuIds="+menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
                         this.dialogFormVisible=false;
                         if(res.data.flag){
                             this.$message({
                               message:res.data.message,
                               type:'success'
-                            })
+                            });
                         }else{
                             this.$message.error(res.data.message)
                         }
@@ -348,6 +352,7 @@
                             this.dialogFormVisible4Edit = true;
                             this.activeName = "first";
                             this.formData = res.data.data;
+                            this.$refs.tree.setCheckedKeys([]);
                             axios.get("/role/findAll.do").then((res)=>{
                                 if(res.data.flag){
                                     this.permissionTableData = res.data.data.permissionTableData;
