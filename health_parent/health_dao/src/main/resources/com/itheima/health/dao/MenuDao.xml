@@ -3,22 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itheima.health.dao.MenuDao">
 
-    <select id="getMenuByUsername" parameterType="string" resultType="map">
-        SELECT m.id,m.`name` title, m.path, m.`icon`
-          FROM t_menu m
-            WHERE id IN
-              (SELECT rm.menu_id FROM t_role r,t_role_menu rm WHERE r.id = rm.`role_id` AND r.id IN
-                  (SELECT ur.`role_id` FROM t_role r, t_user_role ur WHERE r.id=ur.`role_id`AND ur.`user_id` =
-                      (SELECT id FROM t_user WHERE username = #{username})
-  	    )
-          )AND m.`level`=1
-    </select>
 
-    <select id="findMenuChildrenByMenuId" parameterType="int" resultType="map">
-        SELECT m2.name title, m2.path, m2.linkUrl
-          FROM t_menu m1, t_menu m2
-          WHERE m1.id = m2.parentMenuId AND m1.id = #{id};
-    </select>
 
 <select id="findAll" resultType="map">
     select id,name label from t_menu where level = 1

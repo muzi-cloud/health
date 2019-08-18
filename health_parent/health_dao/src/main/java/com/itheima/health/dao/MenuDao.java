@@ -6,9 +6,6 @@ import java.util.Map;
 public interface MenuDao {
 
 
-    List<Map<String,Object>> getMenuByUsername(String username);
-
-    List<Map<String,Object>> findMenuChildrenByMenuId(Integer id);
 
 
     List<Map<String,Object>> findAll();
