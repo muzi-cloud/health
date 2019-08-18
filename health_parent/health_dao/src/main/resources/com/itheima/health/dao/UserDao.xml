@@ -63,7 +63,7 @@
     </delete>
 
     <select id="findMenu" parameterType="string" resultMap="findTwoMenu">
-        select m.path,m.name title,m.icon,m.linkUrl,role_id,m.id from t_menu m,(select * from t_role_menu where role_id in
+        select m.path,m.name name,m.icon,m.linkUrl,role_id,m.id from t_menu m,(select * from t_role_menu where role_id in
         (select id from t_role where id in(select role_id from t_user_role where user_id in
         (select id from t_user where username = #{value})))) r where m.id = r.menu_id and m.level = 1
     </select>
@@ -75,7 +75,7 @@
 
 
     <select id="findTwoMenuByOneMenu" resultType="map">
-        select m.path,m.name title,m.linkUrl from t_menu m where parentMenuId = #{id} and id in(select menu_id from t_role_menu where role_id = #{rid})
+        select m.path,m.name name,m.linkUrl from t_menu m where parentMenuId = #{id} and id in(select menu_id from t_role_menu where role_id = #{rid})
     </select>
 
 </mapper>
