@@ -14,9 +14,10 @@ public class Menu implements Serializable{
     private Integer priority; // 优先级（用于排序）
     private String description; // 描述
     private String icon;//图标
+    private Integer parentMenuId;//父菜单id
     private Set<Role> roles = new HashSet<Role>(0);//角色集合
     private List<Menu> children = new ArrayList<>();//子菜单集合
-    private Integer parentMenuId;//父菜单id
+
 
     public Integer getId() {
         return id;
