@@ -275,9 +275,9 @@
             methods: {
                 //编辑
                 handleEdit() {
-                    var menuIds = this.$refs.tree.getCheckedKeys();
-                    menuIds.push(this.$refs.tree.getHalfCheckedKeys());
-                    axios.post("/role/edit.do?menuIds="+menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
+                     this.menuIds = this.$refs.tree.getCheckedKeys();
+                    this.menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    axios.post("/role/edit.do?menuIds="+this.menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
                         this.dialogFormVisible4Edit=false;
                         if(res.data.flag){
                             this.$message({
@@ -295,9 +295,9 @@
                 handleAdd () {
                     // alert(this.$refs.tree.getCheckedKeys());
                     // alert(this.permissionIds);
-                    var menuIds = this.$refs.tree.getCheckedKeys();
-                    menuIds.push(this.$refs.tree.getHalfCheckedKeys());
-                    axios.post("/role/add.do?menuIds="+menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
+                    this.menuIds = this.$refs.tree.getCheckedKeys();
+                    this.menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    axios.post("/role/add.do?menuIds="+this.menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
                         this.dialogFormVisible=false;
                         if(res.data.flag){
                             this.$message({
