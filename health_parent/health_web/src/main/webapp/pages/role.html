@@ -264,7 +264,6 @@
                 formData: {},//表单数据
                 permissionTableData:[],//新增和编辑表单中对应的权限列表数据
                 menuTableData:[],//新增和编辑表单中对应的菜单列表数据
-                menuIds:[],//新增和编辑表单中对应的菜单列表id
                 permissionIds:[],//新增和编辑表单中权限对应的复选框，基于双向绑定可以进行回显和数据提交
                 dialogFormVisible: false,//控制添加窗口显示/隐藏
                 dialogFormVisible4Edit:false//控制编辑窗口显示/隐藏
@@ -275,9 +274,9 @@
             methods: {
                 //编辑
                 handleEdit() {
-                     this.menuIds = this.$refs.tree.getCheckedKeys();
-                    this.menuIds.push(this.$refs.tree.getHalfCheckedKeys());
-                    axios.post("/role/edit.do?menuIds="+this.menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
+                    var menuIds = this.$refs.tree.getCheckedKeys();
+                    menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    axios.post("/role/edit.do?menuIds="+menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
                         this.dialogFormVisible4Edit=false;
                         if(res.data.flag){
                             this.$message({
@@ -295,9 +294,9 @@
                 handleAdd () {
                     // alert(this.$refs.tree.getCheckedKeys());
                     // alert(this.permissionIds);
-                    this.menuIds = this.$refs.tree.getCheckedKeys();
-                    this.menuIds.push(this.$refs.tree.getHalfCheckedKeys());
-                    axios.post("/role/add.do?menuIds="+this.menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
+                    var menuIds = this.$refs.tree.getCheckedKeys();
+                    menuIds.push(this.$refs.tree.getHalfCheckedKeys());
+                    axios.post("/role/add.do?menuIds="+menuIds+"&permissionIds="+this.permissionIds,this.formData).then((res)=>{
                         this.dialogFormVisible=false;
                         if(res.data.flag){
                             this.$message({
