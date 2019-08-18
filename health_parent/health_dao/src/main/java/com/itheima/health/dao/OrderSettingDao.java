@@ -32,7 +32,7 @@ public interface OrderSettingDao {
 
     void updateReservationsByOrderDate(OrderSetting orderSetting);
 
-    void clearOrderSetting();
+    void clearOrderSetting(String date);
     //通过查询条件封装套餐列表
     Page<OrderList> findPage(String queryString);
 

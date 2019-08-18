@@ -33,8 +33,8 @@
     </update>
 
     <!--每月最后一天凌晨两点清理数据库-->
-    <delete id="clearOrderSetting" >
-          delete from t_ordersetting
+    <delete id="clearOrderSetting" parameterType="string">
+          delete from t_ordersetting where orderDate &lt;= #{date}
     </delete>
     <!--通过查询条件封装套餐列表-->
     <select id="findPage" parameterType="string" resultType="orderList">

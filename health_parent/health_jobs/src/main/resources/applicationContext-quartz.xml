@@ -43,7 +43,8 @@
 
     <bean id="orderTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="orderDetail"></property>
-        <property name="cronExpression" value="0 ? 2 L * ?"></property>
+        <!--<property name="cronExpression" value="0 ? 2 L * ?"></property>-->
+        <property name="cronExpression" value="0/15 * * * * ?"></property>
     </bean>
     <!--3：启动触发器-->
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
