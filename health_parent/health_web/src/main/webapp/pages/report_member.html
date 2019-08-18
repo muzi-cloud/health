@@ -84,7 +84,7 @@
 
                 axios.post("/report/getMemberReportByDate.do",month).then((res)=>{
 
-                    if(!res.data.flag){
+                    if(res.data.flag){
 
                         this.$message.error(res.data.message);
                     }else {

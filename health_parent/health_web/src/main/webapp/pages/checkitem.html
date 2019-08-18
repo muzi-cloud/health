@@ -243,7 +243,7 @@
                         if(valid){
                             //alert("ok")
                             // axios，发送ajax请求，传递数据
-                            axios.post("/menu/update.do",this.formData).then((res)=>{
+                            axios.post("/checkitem/update.do",this.formData).then((res)=>{
                                 if(res.data.flag){
                                     this.$message({
                                         message:res.data.message,
@@ -330,7 +330,7 @@
                     this.dialogFormVisible4Edit = true;
                     //alert(row.id);
                     // 使用检查项id，查询数据库，完成表单回显
-                    axios.get("/menu/findById.do?id="+row.id).then((res)=>{
+                    axios.get("/checkitem/findById.do?id="+row.id).then((res)=>{
                         if(res.data.flag){
                             this.$message({
                                 type:"success",
@@ -368,7 +368,7 @@
                         center: true
                     }).then(() => {
                         // 调用ajax，返回Result
-                        axios.get("/menu/delete.do?id="+row.id).then((res)=>{
+                        axios.get("/checkitem/delete.do?id="+row.id).then((res)=>{
                             if(res.data.flag){
                                 this.$message({
                                     type: 'success',

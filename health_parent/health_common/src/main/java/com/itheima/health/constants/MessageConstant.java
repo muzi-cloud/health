@@ -78,12 +78,16 @@ public class MessageConstant {
 
     public static final String GET_AGE_LIST_SUCCESS = "获取年龄段人数成功";
     public static final String GET_AGE_LIST_FAIL = "获取年龄段人数失败";
-
     public static final String ADD_MEMBER1_SUCCESS = "新增菜单成功";
     public static final String DELETE_MEMBER1_FAIL = "新增菜单失败";
-    public static final String EDIT_CHECKITEM1_FAIL = "编辑菜单项失败";
-    public static final String EDIT_CHECKITEM1_SUCCESS = "编辑菜单项成功";
 
-    public static final String DELETE_CHECKITEM1_FAIL = "删除菜单项失败";
-    public static final String DELETE_CHECKITEM1_SUCCESS = "删除菜单项成功";
+    public static final String EDIT_CHECKITEM1_SUCCESS = "查询菜单成功";
+    public static final String EDIT_CHECKITEM1_FAIL = "查询菜单失败";
+
+    public static final String EDIT_CHECKITEM2_SUCCESS = "编辑菜单成功";
+    public static final String EDIT_CHECKITEM2_FAIL = "编辑菜单失败";
+
+    public static final String DELETE_CHECKITEM1_SUCCESS = "删除菜单成功";
+    public static final String DELETE_CHECKITEM1_FAIL = "删除菜单失败";
+
 }
